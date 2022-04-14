@@ -1,0 +1,4 @@
+body {display: flex;justify-content: center;align-items: center;height: 100vh;font-family: "Vedana", sans-serif;}
+
+.link-form {width: 30%;}
+.link-form input, .link-form button {display: block;margin-bottom: 15px;width: 100%;box-sizing: border-box;height: 40px;}
