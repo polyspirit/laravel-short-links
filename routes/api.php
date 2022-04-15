@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LinkController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,12 +16,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/i', function () {
-
-    return response()->json([
-        'status' => 'success',
-        'message' => 'good',
-        'data' => ['test' => 123]
-    ], 200);
-
-});
+Route::post('i', [LinkController::class, 'store']);

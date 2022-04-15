@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LinkController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('main');
+    return view('pages.main');
 });
+Route::get('i/{code}', [LinkController::class, 'show']);

@@ -2164,14 +2164,82 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-var submitBtn = document.querySelector('.submit');
+var linksForm = function linksForm() {
+  var submitBtn = document.querySelector('.submit');
+  var urlField = document.querySelector('#url');
+  var textLink = document.querySelector('.link-text');
+  var errorText = document.querySelector('.error-text');
+  var errorDescription = document.querySelector('.error-description');
 
-submitBtn.onclick = function (e) {
-  e.preventDefault();
-  axios.post('/api/i', {}).then(function (response) {
-    console.log(response);
-  });
+  var clearElements = function clearElements() {
+    textLink.innerText = '';
+    textLink.href = '';
+    errorText.innerText = '';
+
+    while (errorDescription.firstChild) {
+      errorDescription.removeChild(errorDescription.firstChild);
+    }
+  };
+
+  var showText = function showText(element, result) {
+    element.innerText = result.message;
+    console.log(result.data);
+  };
+
+  var handleError = function handleError(response) {
+    if (response.status === 406 || response.data.message === 'Validation error') {
+      var ul = document.createElement('ul');
+      response.data.data.url.forEach(function (item) {
+        var li = document.createElement('li');
+        li.innerText = item;
+        ul.append(li);
+      });
+      errorDescription.append(ul);
+    }
+  };
+
+  submitBtn.onclick = function (e) {
+    e.preventDefault();
+    axios.post('/api/i', {
+      url: urlField.value
+    }).then(function (response) {
+      clearElements();
+
+      if (response.data.status === 'error') {
+        showText(errorText, response.data);
+        handleError(response);
+      } else {
+        showText(textLink, response.data);
+        textLink.href = response.data.message;
+      }
+    })["catch"](function (error) {
+      clearElements();
+
+      if (error.response) {
+        showText(errorText, error.response.data);
+        handleError(error.response);
+        console.log('Error code: ' + error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log('Error', error.message);
+      }
+
+      console.log(error.config);
+    });
+  };
+
+  if (location.protocol === 'https:') {
+    textLink.style.cursor = 'pointer';
+
+    textLink.onclick = function (e) {
+      navigator.clipboard.writeText(textLink.innerText);
+    };
+  }
 };
+
+linksForm();
 
 /***/ }),
 
