@@ -6,4 +6,3 @@ body {display: flex;flex-direction: column;justify-content: center;align-items: 
 .link-form input, .link-form button {display: block;margin-bottom: 15px;width: 100%;box-sizing: border-box;height: 40px;}
 
 .error {margin-bottom: 10px;color: #c21807;}
-.error {}
