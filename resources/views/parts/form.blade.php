@@ -9,5 +9,8 @@
         <div class="error-text"></div>
         <div class="error-description"></div>
     </div>
-    <div class="link">Your short-link: <a href="" class="link-text" target="_blank"></a></div>
+    <div class="link">
+        Your short-link: <a href="" class="link-text" target="_blank"></a>
+        <span class="copy-link" title="copy"></span>
+    </div>
 </form>

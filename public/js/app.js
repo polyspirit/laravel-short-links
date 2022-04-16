@@ -2168,6 +2168,7 @@ var linksForm = function linksForm() {
   var submitBtn = document.querySelector('.submit');
   var urlField = document.querySelector('#url');
   var textLink = document.querySelector('.link-text');
+  var copyLink = document.querySelector('.copy-link');
   var errorText = document.querySelector('.error-text');
   var errorDescription = document.querySelector('.error-description');
 
@@ -2231,9 +2232,7 @@ var linksForm = function linksForm() {
   };
 
   if (location.protocol === 'https:') {
-    textLink.style.cursor = 'pointer';
-
-    textLink.onclick = function (e) {
+    copyLink.onclick = function (e) {
       navigator.clipboard.writeText(textLink.innerText);
     };
   }

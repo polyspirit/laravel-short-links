@@ -5,6 +5,7 @@ const linksForm = () => {
     const submitBtn = document.querySelector('.submit');
     const urlField = document.querySelector('#url');
     const textLink = document.querySelector('.link-text');
+    const copyLink = document.querySelector('.copy-link');
     const errorText = document.querySelector('.error-text');
     const errorDescription = document.querySelector('.error-description');
 
@@ -67,8 +68,7 @@ const linksForm = () => {
     }
 
     if (location.protocol === 'https:') {
-        textLink.style.cursor = 'pointer';
-        textLink.onclick = e => {
+        copyLink.onclick = e => {
             navigator.clipboard.writeText(textLink.innerText);
         }
     }
